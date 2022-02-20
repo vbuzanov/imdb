@@ -1,0 +1,33 @@
+{% extends 'imdb/base.html' %}
+{% load static %}
+
+{% block title %} {{object}} {% endblock %}
+
+{% block content %}
+
+
+<h2 class="text-light">{{object}}</h2>
+<h1 class="main-color text-end">
+    <img src="{% static 'imdb/img/star.png' %}" class="star">
+    {{ object.rating }}
+</h1>
+<p class="text-light">views: {{ object.views }}</p>
+<div class="row my-3 justify-content-between">
+    <div class="col-3">
+         <img src="{{ object.poster.url }}" class="image-fluid">
+    </div>
+   
+    <div class="col-6">
+        {%  if object.trailer %}
+        <iframe class="w-100 h-100" src="https://www.youtube.com/embed/{{ movie.trailer }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        {%else%}
+        <iframe class="w-100 h-100" src="https://www.youtube.com/embed/NvdLsMxw6yw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        {%endif%}
+    </div>
+</div>
+{%  if object.plot %}
+<p class="text-light"> {{object.plot.read.decode}} </p>
+{%endif%}
+<a href="#" class="text-info">Director: {{ object.director }}</a>
+
+{% endblock %}

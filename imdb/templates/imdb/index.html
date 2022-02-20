@@ -1,0 +1,48 @@
+{% extends 'imdb/base.html' %}
+{% load static %}
+
+{% block title %}IMDb: Rating, Reviews {% endblock %}
+
+{% block content %}
+<h1 class="main-color text-center">IMDb</h1>
+
+<h2 class="text-light">Best Movies:</h2>
+
+<div class="row">
+    {% for movie in best_movies %}
+        <div class="col-3">
+            <img src="{{ movie.poster.url }}" class="image-fluid h-50">
+            <h1 class="main-color">
+                <img src="{% static 'imdb/img/star.png' %}" class="star">
+                {{ movie.rating }}
+            </h1>
+            <a href="{{ movie.url }}">
+              <h4 class="text-light">{{ movie }}</h4>  
+            </a>
+            <p class="text-info">views: {{ movie.views }} </p>
+            
+            {% if movie.trailer %}
+                <a href="https://www.youtube.com/watch?v={{movie.trailer}}" target="_blank" class="btn btn-outline-info">watch trailer</a>
+            {%endif%}
+        </div>
+    {% endfor %}
+</div>
+
+<div class="row justify-content-between">
+    <div class="col-2">
+        <a href="{% url 'imdb:movie-list' %}">
+            <h3 class="main-color">All Movies >></h3>
+        </a>
+    </div>
+    <div class="col-4">
+        <a href="{% url 'imdb:top-seven-movies-list' %}">
+            <h3 class="main-color text-end">Top 7 The best Movies >></h3>
+        </a>
+    </div>
+
+
+</div>
+
+<hr class="hr-light">
+
+{% endblock %}
